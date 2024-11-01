@@ -1,4 +1,4 @@
-#!/use/bin/env python3
+#!/usr/bin/env python3
 """module for things i don't remmembr"""
 import csv
 from typing import List, Dict
