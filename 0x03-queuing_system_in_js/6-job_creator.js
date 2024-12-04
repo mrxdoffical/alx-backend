@@ -1,16 +1,6 @@
-import redis from 'redis';
 import kue from 'kue';
 
 const queue = kue.createQueue();
-const client = redis.createClient();
-
-client.on('connect', () => {
-  console.log('Redis client connected to the server');
-});
-
-client.on('error', (error) => {
-  console.log(`Redis client not connected to the server: ${error}`);
-});
 
 const jobData = {
   phoneNumber: '01063440605',
