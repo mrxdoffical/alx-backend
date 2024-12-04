@@ -12,10 +12,6 @@ client.on('error', (error) => {
   console.log(`Redis client not connected to the server: ${error}`);
 });
 
-client.on('complete', () => console.log('Notification job completed'));
-
-client.on('falied', () => console.log('Notification job failed'));
-
 const jobData = {
   phoneNumber: '01063440605',
   message: 'This is the code to verify your account',
@@ -27,3 +23,7 @@ const job = queue.create('push_notification_code', jobData)
       console.log(`Notification job created: ${job.id}`);
     }
   });
+
+job.on('complete', () => console.log('Notification job completed'));
+
+job.on('falied', () => console.log('Notification job failed'));
