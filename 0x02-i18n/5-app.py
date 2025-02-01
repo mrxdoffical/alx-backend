@@ -6,7 +6,12 @@ from flask_babel import Babel, _
 
 
 class Config:
-    """Configuration for Babel."""
+    """Configuration for Babel.
+
+    This class contains the configuration for supported languages
+    , default locale
+    , and timezone.
+    """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -26,7 +31,10 @@ users = {
 
 
 def get_user() -> dict:
-    """Retrieve a user dictionary or None if the ID is not found."""
+    """Retrieve a user dictionary or None if the ID is not found.
+
+    This function mocks a user database lookup.
+    """
     user_id = request.args.get('login_as')
     if user_id and int(user_id) in users:
         return users[int(user_id)]
@@ -35,13 +43,20 @@ def get_user() -> dict:
 
 @app.before_request
 def before_request() -> None:
-    """Set the user in the global context before each request."""
+    """Set the user in the global context before each request.
+
+    This function uses get_user to find a user
+    , and sets it as a global variable.
+    """
     g.user = get_user()
 
 
 @babel.localeselector
 def get_locale() -> str:
-    """Determine the best match for supported languages."""
+    """Determine the best match for supported languages.
+
+    This function checks the locale parameter and user preferences.
+    """
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
         return locale
@@ -52,7 +67,10 @@ def get_locale() -> str:
 
 @app.route('/')
 def get_index() -> str:
-    """The home/index page."""
+    """The home/index page.
+
+    This function renders the index template.
+    """
     return render_template('5-index.html')
 
 
